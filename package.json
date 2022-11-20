@@ -4,7 +4,8 @@
   "description": "<br/>",
   "main": "index.js",
   "scripts": {
-    "netlify": "netlify"
+    "netlify": "netlify",
+    "dev": "netlify dev"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,8 @@
   },
   "homepage": "https://github.com/Jesusml1/hack-serverless-1#readme",
   "dependencies": {
+    "@middy/core": "^3.6.2",
+    "@middy/http-json-body-parser": "^3.6.2",
     "netlify-cli": "^12.2.4"
   }
 }
