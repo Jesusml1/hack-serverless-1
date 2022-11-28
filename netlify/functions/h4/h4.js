@@ -1,13 +1,12 @@
+const response = require("../../../shared/response");
+
 const handler = async (event) => {
   try {
     if (event.httpMethod === "DELETE") {
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ content: "delete" }),
-      };
+      return response({ content: "delete" }, 200);
     }
   } catch (error) {
-    return { statusCode: 500, body: error.toString() };
+    return response(error.toString(), 500);
   }
 };
 

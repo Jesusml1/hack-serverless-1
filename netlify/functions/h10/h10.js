@@ -1,5 +1,6 @@
 const middy = require("@middy/core");
 const httpJsonBodyParser = require("@middy/http-json-body-parser");
+const response = require("../../../shared/response");
 
 const handler = middy(async (event) => {
   try {
@@ -7,18 +8,12 @@ const handler = middy(async (event) => {
     const { body, httpMethod } = event;
     if (httpMethod === "GET") {
       if (lista.find((e) => e === body.alias)) {
-        return {
-          statusCode: 200,
-          body: JSON.stringify({ payload: body.alias }),
-        };
+        return response({ payload: body.alias }, 200);
       }
-      return {
-        statusCode: 404,
-        body: JSON.stringify({ payload: "not found" }),
-      };
+      return response({ payload: "not found" }, 404);
     }
   } catch (error) {
-    return { statusCode: 500, body: error.toString() };
+    return response(error.toString(), 500);
   }
 });
 

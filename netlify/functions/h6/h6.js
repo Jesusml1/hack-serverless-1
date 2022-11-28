@@ -1,3 +1,5 @@
+const response = require("../../../shared/response");
+
 const handler = async (event) => {
   try {
     const httpMethod = event.httpMethod;
@@ -17,17 +19,11 @@ const handler = async (event) => {
         break;
     }
     if (bodyResponse) {
-      return {
-        statusCode: 200,
-        body: JSON.stringify(bodyResponse),
-      };
+      return response(bodyResponse, 200);
     }
-    return {
-      statusCode: 405,
-      body: JSON.stringify({}),
-    };
+    return response({}, 405);
   } catch (error) {
-    return { statusCode: 500, body: error.toString() };
+    return response(error.toString(), 500);
   }
 };
 

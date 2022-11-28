@@ -1,21 +1,17 @@
+const response = require("../../../shared/response");
+
 const handler = async (event) => {
   try {
     const lista = ["foo", "bar", "baz", "qux", "fred"];
     const { queryStringParameters, httpMethod } = event;
     if (httpMethod === "GET") {
       if (lista.find((e) => e === queryStringParameters.alias)) {
-        return {
-          statusCode: 200,
-          body: JSON.stringify({ payload: queryStringParameters.alias }),
-        };
+        return response({ payload: queryStringParameters.alias }, 200);
       }
-      return {
-        statusCode: 404,
-        body: JSON.stringify({ payload: "not found" }),
-      };
+      return response({ payload: "not found" }, 404);
     }
   } catch (error) {
-    return { statusCode: 500, body: error.toString() };
+    return response(error.toString(), 500);
   }
 };
 
